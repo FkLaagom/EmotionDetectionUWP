@@ -1,0 +1,71 @@
+﻿<Page
+    x:Class="EmotionRecognition.Wiews.LibraryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="using:EmotionRecognition.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:EmotionRecognition.Wiews"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:userControl="using:EmotionRecognition.UserControllers"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converter:EmotionToStringConverter x:Key="toString" />
+    </UserControl.Resources>
+
+
+
+    <Grid>
+        <Image Source="ms-appx:///Assets//hidethepainharold.jpg" Stretch="UniformToFill" />
+        <StackPanel
+            Padding="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            CornerRadius="14"
+            Orientation="Horizontal">
+            <StackPanel.Background>
+                <SolidColorBrush Opacity="0.3" Color="White" />
+            </StackPanel.Background>
+            <Image
+                Name="image"
+                Width="400"
+                Height="300"
+                Source="{x:Bind EmotionModel.Url, Mode=OneWay}" />
+            <TextBlock
+                Height="200"
+                FontSize="18"
+                Foreground="Black"
+                Text="{x:Bind EmotionModel.Emotion, Mode=OneWay, Converter={StaticResource toString}}"
+                TextWrapping="WrapWholeWords" />
+        </StackPanel>
+        <StackPanel
+            Padding="0,10,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <Button
+                Width="130"
+                Margin="40"
+                Padding="20"
+                Click="Button_OpenFile"
+                Foreground="Black">
+                <StackPanel>
+                    <SymbolIcon Symbol="OpenFile"/>
+                    <TextBlock>Open File</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button
+                Width="130"
+                Margin="20"
+                Padding="20"
+                Click="Button_OpenCamera"
+                Foreground="Black">
+                <StackPanel>
+                    <SymbolIcon Symbol="Camera" />
+                    <TextBlock>Camera</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
